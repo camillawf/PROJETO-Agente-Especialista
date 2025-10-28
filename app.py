@@ -79,8 +79,6 @@ with st.sidebar:
 )
 
 
-dataframes = {}
-
 uploaded_file = st.file_uploader("Envie um arquivo", type=["csv", "pdf"])
 
 if uploaded_file is not None:
@@ -114,6 +112,7 @@ if st.button("Enviar Pergunta") and user_query:
     st.write("Resposta do Agente:")
     st.write(response.choices[0].message.content)
     
+
 
 
 
