@@ -14,8 +14,8 @@ import plotly.express as px
 
 col1, col2 = st.columns([1, 5])
 
-with col1:
-    st.image("assets/Depeto.png", width=80)
+#with col1:
+#    st.image("assets/Depeto.png", width=80)
 
 st.markdown("""
     <h1 style='white-space: nowrap;'>
@@ -73,7 +73,7 @@ client = Groq(api_key=GROQ_API_KEY)
 
 
 with st.sidebar:
-    st.image('assets/logo.png')
+    #st.image('assets/logo.png')
     uploaded_files = st.file_uploader(
         "Escolha o seu arquivo pdf", accept_multiple_files=True, type=["pdf"]
 )
@@ -102,4 +102,5 @@ if st.button("Enviar Pergunta") and user_query:
     st.write("Resposta do Agente:")
     st.write(response.choices[0].message.content)
     
+
 
