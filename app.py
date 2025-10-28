@@ -12,7 +12,6 @@ from groq import Groq
 import plotly.express as px
 
 
-# 
 col1, col2 = st.columns([1, 5])
 
 with col1:
@@ -102,3 +101,4 @@ if st.button("Enviar Pergunta") and user_query:
     st.write("Resposta do Agente:")
     st.write(response.choices[0].message.content)
     
+
