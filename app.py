@@ -31,7 +31,7 @@ with cls1:
     st.markdown(
         """
         <div style="background-color:#f0f0f0; padding:10px; border-radius:50px; color: black">
-            <strong>Escreva alguma descrição </strong>
+            <strong>Quais os documentos para admissão de servente? </strong>
         </div>
         """,
         unsafe_allow_html=True
@@ -43,7 +43,7 @@ with cls2:
     st.markdown(
         """
         <div style="background-color:#f0f0f0; padding:10px; border-radius:50px; color: black">
-            <strong>Faça uma pergunta chave</strong>
+            <strong>Tipos de afastamento no ponto eletrônico</strong>
         </div>
         """,
         unsafe_allow_html=True
@@ -55,7 +55,7 @@ with cls3:
     st.markdown(
         """
         <div style="background-color:#f0f0f0; padding:10px; border-radius:50px; color: black">
-            <strong>Cria outra pergunta </strong>
+            <strong>Como funciona o pagamento do prêmio frequência? </strong>
         </div>
         """,
         unsafe_allow_html=True
@@ -101,6 +101,7 @@ if st.button("Enviar Pergunta") and user_query:
     st.write("Resposta do Agente:")
     st.write(response.choices[0].message.content)
     
+
 
 
 
