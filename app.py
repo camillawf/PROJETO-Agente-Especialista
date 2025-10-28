@@ -7,7 +7,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import PyPDF
+import pypdf
 import os
 from groq import Groq
 import plotly.express as px
@@ -113,6 +113,7 @@ if st.button("Enviar Pergunta") and user_query:
     st.write("Resposta do Agente:")
     st.write(response.choices[0].message.content)
     
+
 
 
 
