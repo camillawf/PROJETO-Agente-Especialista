@@ -7,7 +7,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import PyPDF2
+import PyPDF
 import os
 from groq import Groq
 import plotly.express as px
@@ -78,6 +78,7 @@ with st.sidebar:
         "Escolha o seu arquivo pdf", accept_multiple_files=True, type=["pdf"]
 )
 
+dataframes = {}
 
 uploaded_file = st.file_uploader("Envie um arquivo", type=["csv", "pdf"])
 
@@ -112,6 +113,7 @@ if st.button("Enviar Pergunta") and user_query:
     st.write("Resposta do Agente:")
     st.write(response.choices[0].message.content)
     
+
 
 
 
