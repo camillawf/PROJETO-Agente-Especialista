@@ -7,6 +7,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import PyPDF2
 import os
 from groq import Groq
 import plotly.express as px
@@ -80,12 +81,24 @@ with st.sidebar:
 
 dataframes = {}
 
-if uploaded_files:
-    for uploaded_file in uploaded_files:
+uploaded_file = st.file_uploader("Envie um arquivo", type=["csv", "pdf"])
+
+if uploaded_file is not None:
+    file_type = uploaded_file.name.split(".")[-1].lower()
+
+    if file_type == "csv":
         df = pd.read_csv(uploaded_file)
-        dataframes[uploaded_file.name] = df
-        st.write(f"**{uploaded_file.name}**") 
-        st.dataframe(df.head())
+        st.dataframe(df)
+
+    elif file_type == "pdf":
+        pdf_reader = PyPDF2.PdfReader(uploaded_file)
+        text = ""
+        for page in pdf_reader.pages:
+            text += page.extract_text() or ""
+        st.text_area("Conteúdo extraído do PDF:", text, height=300)
+
+    else:
+        st.warning("Tipo de arquivo não suportado.")
     
     
 user_query = st.text_area("")
@@ -101,6 +114,7 @@ if st.button("Enviar Pergunta") and user_query:
     st.write("Resposta do Agente:")
     st.write(response.choices[0].message.content)
     
+
 
 
 
