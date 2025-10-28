@@ -7,7 +7,6 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import pypdf
 import os
 from groq import Groq
 import plotly.express as px
@@ -15,12 +14,11 @@ import plotly.express as px
 
 col1, col2 = st.columns([1, 5])
 
+with col1:
+    st.image("assets/Depeto.png", width=80)
 
-st.markdown("""
-    <h1 style='white-space: nowrap;'>
-        DEPÊTO
-    </h1>
-""", unsafe_allow_html=True)
+with col2:
+    st.title("DEPÊTO")
 
 
 
@@ -32,7 +30,7 @@ with cls1:
     st.markdown(
         """
         <div style="background-color:#f0f0f0; padding:10px; border-radius:50px; color: black">
-            <strong>Quais os documentos para admissão de servente? </strong>
+            <strong>Escreva alguma descrição </strong>
         </div>
         """,
         unsafe_allow_html=True
@@ -44,7 +42,7 @@ with cls2:
     st.markdown(
         """
         <div style="background-color:#f0f0f0; padding:10px; border-radius:50px; color: black">
-            <strong>Tipos de afastamento no ponto eletrônico</strong>
+            <strong>Faça uma pergunta chave</strong>
         </div>
         """,
         unsafe_allow_html=True
@@ -56,13 +54,11 @@ with cls3:
     st.markdown(
         """
         <div style="background-color:#f0f0f0; padding:10px; border-radius:50px; color: black">
-            <strong>Como funciona o pagamento do prêmio frequência? </strong>
+            <strong>Cria outra pergunta </strong>
         </div>
         """,
         unsafe_allow_html=True
     )
-
-
 
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "chave")
@@ -74,30 +70,20 @@ client = Groq(api_key=GROQ_API_KEY)
 
 
 with st.sidebar:
+    st.image('assets/logo.png')
     uploaded_files = st.file_uploader(
         "Escolha o seu arquivo pdf", accept_multiple_files=True, type=["pdf"]
 )
 
+
 dataframes = {}
 
-uploaded_file = st.file_uploader("Envie um arquivo", type=["csv", "pdf"])
-
-if uploaded_file is not None:
-    file_type = uploaded_file.name.split(".")[-1].lower()
-
-    if file_type == "csv":
+if uploaded_files:
+    for uploaded_file in uploaded_files:
         df = pd.read_csv(uploaded_file)
-        st.dataframe(df)
-
-    elif file_type == "pdf":
-        pdf_reader = PyPDF2.PdfReader(uploaded_file)
-        text = ""
-        for page in pdf_reader.pages:
-            text += page.extract_text() or ""
-        st.text_area("Conteúdo extraído do PDF:", text, height=300)
-
-    else:
-        st.warning("Tipo de arquivo não suportado.")
+        dataframes[uploaded_file.name] = df
+        st.write(f"**{uploaded_file.name}**") 
+        st.dataframe(df.head())
     
     
 user_query = st.text_area("")
@@ -113,11 +99,3 @@ if st.button("Enviar Pergunta") and user_query:
     st.write("Resposta do Agente:")
     st.write(response.choices[0].message.content)
     
-
-
-
-
-
-
-
-
