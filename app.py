@@ -10,7 +10,7 @@ import plotly.express as px
 
 # --- CONFIGURAÇÃO DE CAMINHOS DINÂMICOS 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-ASSETS_DIR = os.path.join(BASE_DIR, "assets")
+ASSETS_DIR = os.path.join(BASE_DIR, "ASSETS")
 
 # --- INTERFACE
 col1, col2 = st.columns([1, 5])
@@ -103,3 +103,4 @@ if st.button("Enviar Pergunta"):
 
 # Fecha a conexão
 conn.close()
+
