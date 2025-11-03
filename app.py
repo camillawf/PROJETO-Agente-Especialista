@@ -92,7 +92,7 @@ if st.button("Enviar Pergunta"):
         cursor.execute("SELECT nome, conteudo FROM arquivos")
         all_files = cursor.fetchall()
         context = "\n\n".join([f"Arquivo: {n}\nConteúdo: {c[:3000]}" for n, c in all_files])  # limita texto
-        prompt = f"Você é um Assistente Virtual Especialista em Departamento Pessoal. Use as informações abaixo para responder:\n\n{context}\n\nPergunta: {user_query}"
+        prompt = f"Você é um Assistente Virtual Especialista em Departamento Pessoal. Você deve consultar o banco de dados disponível antes de responder. Se a informação não estiver no banco de dados, não invente. Use as informações abaixo para responder:\n\n{context}\n\nPergunta: {user_query}"
 
         response = client.chat.completions.create(
             model="llama3-8b-8192",
@@ -103,6 +103,7 @@ if st.button("Enviar Pergunta"):
 
 # Fecha a conexão
 conn.close()
+
 
 
 
