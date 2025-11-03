@@ -22,7 +22,7 @@ with col2:
 cls1, cls2, cls3 = st.columns(3)
 for c, texto in zip(
     [cls1, cls2, cls3],
-    ["Escreva alguma descrição", "Faça uma pergunta chave", "Crie outra pergunta"]
+    ["Lista de documentos para admissão de motorista", "Tipos de afastamento no ponto eletrônico", "Tipos de rescisão"]
 ):
     with c:
         st.markdown(
@@ -103,6 +103,7 @@ if st.button("Enviar Pergunta"):
 
 # Fecha a conexão
 conn.close()
+
 
 
 
