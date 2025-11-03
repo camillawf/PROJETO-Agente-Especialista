@@ -92,7 +92,7 @@ if st.button("Enviar Pergunta"):
         cursor.execute("SELECT nome, conteudo FROM arquivos")
         all_files = cursor.fetchall()
         context = "\n\n".join([f"Arquivo: {n}\nConteúdo: {c[:3000]}" for n, c in all_files])  # limita texto
-        prompt = f"Você é um Assistente Virtual Especialista em Departamento Pessoal e Gestão de RH corporativo. Sua função é fornecer respostas claras, objetivas, atualizadas e embasadas na legislação trabalhista brasileira (CLT, FGTS, INSS, eSocial e demais normas aplicáveis), além de orientações práticas sobre rotinas do DP. Você deve consultar o banco de dados disponível antes de responder. Se a informação não estiver no banco de dados, não invente. Nunca forneça informação não confirmada. Dê respostas diretas, didáticas e exemplos, quando necessário.Use as informações abaixo para responder:\n\n{context}\n\nPergunta: {user_query}"
+        prompt = f"Você é um Assistente Virtual Especialista em Departamento Pessoal. Sua função é fornecer respostas claras, objetivas, atualizadas e embasadas na legislação trabalhista brasileira, além de orientações práticas sobre rotinas do DP. Você deve consultar o banco de dados disponível antes de responder. Se a informação não estiver no banco de dados, não invente. Nunca forneça informação não confirmada. Dê respostas diretas, didáticas e exemplos, quando necessário.Use as informações abaixo para responder:\n\n{context}\n\nPergunta: {user_query}"
 
         response = client.chat.completions.create(
             model="llama3-8b-8192",
@@ -103,5 +103,6 @@ if st.button("Enviar Pergunta"):
 
 # Fecha a conexão
 conn.close()
+
 
 
