@@ -4,7 +4,8 @@ import os
 import sqlite3
 from groq import Groq
 from pypdf import PdfReader
-
+from dotenv import load_dotenv
+load_dotenv()
 
 import plotly.express as px
 
@@ -103,6 +104,7 @@ if st.button("Enviar Pergunta"):
 
 # Fecha a conexão
 conn.close()
+
 
 
 
