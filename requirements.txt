@@ -92,3 +92,5 @@ urllib3==2.5.0
 uvicorn==0.35.0
 watchdog==6.0.0
 zstandard==0.25.0
+from dotenv import load_dotenv
+load_dotenv()
