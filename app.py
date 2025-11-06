@@ -4,14 +4,13 @@ import os
 import sqlite3
 from groq import Groq
 from pypdf import PdfReader
-from dotenv import load_dotenv
-load_dotenv()
+
 
 import plotly.express as px
 
 # --- CONFIGURAÇÃO DE CAMINHOS DINÂMICOS 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-ASSETS_DIR = os.path.join(BASE_DIR, "ASSETS")
+ASSETS_DIR = os.path.join(BASE_DIR, "assets")
 
 # --- INTERFACE
 col1, col2 = st.columns([1, 5])
@@ -104,6 +103,7 @@ if st.button("Enviar Pergunta"):
 
 # Fecha a conexão
 conn.close()
+
 
 
 
