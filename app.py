@@ -35,11 +35,11 @@ for c, texto in zip(
         )
 
 # --- CONFIGURAÇÃO 
-GROQ_API_KEY = os.getenv("GROQ_API_KEY", "chave")
-if not GROQ_API_KEY:
-    st.error("A chave GROQ_API_KEY não foi definida corretamente!")
+OPENAI_API_KEY = os.getenv("GROQ_API_KEY", "chave")
+if not OPENAI_API_KEY:
+    st.error("A chave OPENAI_API_KEY não foi definida corretamente!")
     st.stop()
-client = Groq(api_key=GROQ_API_KEY)
+client = Groq(api_key=OPENAI_API_KEY)
 
 # --- BANCO DE DADOS
 DB_PATH = os.path.join(BASE_DIR, "arquivos.db")
@@ -103,6 +103,7 @@ if st.button("Enviar Pergunta"):
 
 # Fecha a conexão
 conn.close()
+
 
 
 
