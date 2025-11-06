@@ -15,7 +15,7 @@ ASSETS_DIR = os.path.join(BASE_DIR, "assets")
 # --- INTERFACE
 col1, col2 = st.columns([1, 5])
 with col1:
-    st.image(os.path.join(ASSETS_DIR, "Depeto.png"), width=80)
+    st.image(os.path.join(BASE_DIR, "assets", "Depeto.png"), width=80)
 with col2:
     st.title("DEPÊTO")
 
@@ -103,6 +103,7 @@ if st.button("Enviar Pergunta"):
 
 # Fecha a conexão
 conn.close()
+
 
 
 
