@@ -105,10 +105,11 @@ if user_query:
     prompt = f"Você é um Assistente Virtual Especialista em Departamento Pessoal. Você deve consultar o banco de dados disponível antes de responder. Se a informação não estiver no banco de dados, não invente. Use as informações abaixo para responder:\n\n{context}\n\nPergunta: {user_query}"
 
 
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=st.session_state.messages + [{"role": "user", "content": prompt}]
+    response = client.responses.create(
+    model="gpt-4o-mini",
+    input=st.session_state.messages + [{"role": "user", "content": prompt}]
     )
+
 
     answer = response.choices[0].message.content
     st.session_state.messages.append({"role": "assistant", "content": answer})
@@ -118,6 +119,7 @@ if user_query:
 
 # Fecha conexão
 conn.close()
+
 
 
 
