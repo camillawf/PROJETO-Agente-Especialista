@@ -10,6 +10,8 @@ from pypdf import PdfReader
 
 import plotly.express as px
 
+client = OpenAI(api_key="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")
+
 # --- CONFIGURAÇÃO DE CAMINHOS DINÂMICOS 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ASSETS_DIR = os.path.join(BASE_DIR, "assets")
@@ -105,3 +107,4 @@ if st.button("Enviar Pergunta"):
 
 # Fecha a conexão
 conn.close()
+
