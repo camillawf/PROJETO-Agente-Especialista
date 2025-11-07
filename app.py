@@ -9,7 +9,7 @@ import plotly.express as px
 
 # --- CARREGA A CHAVE DA OPENAI ---
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 # --- CONFIGURAÇÃO DE CAMINHOS DINÂMICOS 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -119,3 +119,4 @@ if user_query:
 
 # Fecha conexão
 conn.close()
+
