@@ -7,7 +7,7 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import plotly.express as px
 
-
+# --- CARREGA A CHAVE DA OPENAI ---
 load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
@@ -36,10 +36,6 @@ for c, texto in zip(
             """,
             unsafe_allow_html=True
         )
-
-# --- CONFIGURAR OPENAI CLIENT
-load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # --- BANCO DE DADOS
 DB_PATH = os.path.join(BASE_DIR, "arquivos.db")
@@ -102,26 +98,24 @@ if user_query:
     st.session_state.messages.append({"role": "user", "content": user_query})
 
     # Adiciona contexto dos PDFs
-    prompt = f"Você é um Assistente Virtual Especialista em Departamento Pessoal. Você deve consultar o banco de dados disponível antes de responder. Se a informação não estiver no banco de dados, não invente. Use as informações abaixo para responder:\n\n{context}\n\nPergunta: {user_query}"
+    prompt = f"""
+    Você é um Assistente Virtual Especialista em Departamento Pessoal. 
+    Consulte as informações abaixo antes de responder. 
+    Se algo não estiver nos arquivos, diga que não possui essa informação.
+    \n\n{context}\n\nPergunta: {user_query}
+    """
 
-
-    response = client.responses.create(
-    model="gpt-4o-mini",
-    input=st.session_state.messages + [{"role": "user", "content": prompt}]
-    )
-
-
-    answer = response.choices[0].message.content
-    st.session_state.messages.append({"role": "assistant", "content": answer})
-
-    # Atualiza a interface
-    st.rerun()
+    # --- CHAMADA CORRETA PARA A API ---
+    try:
+        response = client.responses.create(
+            model="gpt-4o-mini",
+            input=prompt
+        )
+        answer = response.output[0].content[0].text  # ✅ novo formato
+        st.session_state.messages.append({"role": "assistant", "content": answer})
+        st.rerun()
+    except Exception as e:
+        st.error(f"Erro ao gerar resposta: {e}")
 
 # Fecha conexão
 conn.close()
-
-
-
-
-
-
