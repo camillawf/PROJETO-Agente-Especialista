@@ -1,12 +1,13 @@
 import streamlit as st
 import pandas as pd
 import os
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 import sqlite3
 from pypdf import PdfReader
 from openai import OpenAI
 from dotenv import load_dotenv
 import plotly.express as px
+
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # --- CONFIGURAÇÃO DE CAMINHOS DINÂMICOS 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -115,6 +116,7 @@ if user_query:
 
 # Fecha conexão
 conn.close()
+
 
 
 
