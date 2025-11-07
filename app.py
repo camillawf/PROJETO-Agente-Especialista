@@ -7,6 +7,8 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import plotly.express as px
 
+
+load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # --- CONFIGURAÇÃO DE CAMINHOS DINÂMICOS 
@@ -116,6 +118,7 @@ if user_query:
 
 # Fecha conexão
 conn.close()
+
 
 
 
