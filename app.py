@@ -94,9 +94,9 @@ if user_query:
 
     # Respostas FAKE chumbadas
     respostas_fake = {
-        "documentos motorista": "Para admissão de motorista, solicite RG, CPF, CNH categoria compatível, comprovante de endereço, comprovante de escolaridade, exame admissional e ficha de registro preenchida.",
-        "admissão motorista": "Para admissão de motorista, solicite RG, CPF, CNH categoria compatível, comprovante de endereço, comprovante de escolaridade, exame admissional e ficha de registro preenchida.",
-        "quais documentos preciso solicitar para admitir um motorista": "Para admissão de motorista, solicite RG, CPF, CNH categoria compatível, comprovante de endereço, comprovante de escolaridade, exame admissional e ficha de registro preenchida.",
+        "documentos motorista": "Para admissão de motorista, solicite RG, CPF, CNH na categoria compatível, comprovante de endereço, comprovante de escolaridade, exame toxicológico, exame admissional e ficha de registro preenchida.",
+        "admissão motorista": "Para admissão de motorista, solicite RG, CPF, CNH na categoria compatível, comprovante de endereço, comprovante de escolaridade, exame toxicológico, exame admissional e ficha de registro preenchida.",
+        "quais documentos preciso solicitar para admitir um motorista": "Para admissão de motorista, solicite RG, CPF, CNH na categoria compatível, comprovante de endereço, comprovante de escolaridade, exame toxicológico, exame admissional e ficha de registro preenchida.",
     }
 
     # Normaliza a pergunta
@@ -118,3 +118,4 @@ if user_query:
 
 # Fecha conexão
 conn.close()
+
