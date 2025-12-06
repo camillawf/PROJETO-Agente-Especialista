@@ -3,13 +3,8 @@ import pandas as pd
 import os
 import sqlite3
 from pypdf import PdfReader
-from openai import OpenAI
 from dotenv import load_dotenv
 import plotly.express as px
-
-# --- CARREGA A CHAVE DA OPENAI ---
-load_dotenv()
-client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 # --- CONFIGURAÇÃO DE CAMINHOS DINÂMICOS 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -93,30 +88,33 @@ for msg in st.session_state.messages[1:]:
 # --- Caixa de entrada
 user_query = st.chat_input("Digite sua pergunta sobre os PDFs...")
 
-# --- Quando o usuário envia uma nova pergunta
+# --- Quando o usuário envia uma nova pergunta (VERSÃO FAKE)
 if user_query:
     st.session_state.messages.append({"role": "user", "content": user_query})
 
-    # Adiciona contexto dos PDFs
-    prompt = f"""
-    Você é um Assistente Virtual Especialista em Departamento Pessoal. 
-    Consulte as informações abaixo antes de responder. 
-    Se algo não estiver nos arquivos, diga que não possui essa informação.
-    \n\n{context}\n\nPergunta: {user_query}
-    """
+    # Respostas FAKE chumbadas
+    respostas_fake = {
+        "documentos motorista": "Para admissão de motorista, solicite RG, CPF, CNH categoria compatível, comprovante de endereço, comprovante de escolaridade, exame admissional e ficha de registro preenchida.",
+        "admissão motorista": "Para admissão de motorista, solicite RG, CPF, CNH categoria compatível, comprovante de endereço, comprovante de escolaridade, exame admissional e ficha de registro preenchida.",
+        "quais documentos preciso solicitar para admitir um motorista": "Para admissão de motorista, solicite RG, CPF, CNH categoria compatível, comprovante de endereço, comprovante de escolaridade, exame admissional e ficha de registro preenchida.",
+    }
 
-    # --- CHAMADA CORRETA PARA A API ---
-    try:
-        response = client.responses.create(
-            model="gpt-4o-mini",
-            input=prompt
-        )
-        answer = response.output[0].content[0].text  # ✅ novo formato
-        st.session_state.messages.append({"role": "assistant", "content": answer})
-        st.rerun()
-    except Exception as e:
-        st.error(f"Erro ao gerar resposta: {e}")
+    # Normaliza a pergunta
+    pergunta_normalizada = user_query.lower().strip()
+
+    # Verifica se a pergunta existe no dicionário
+    resposta = None
+    for chave in respostas_fake.keys():
+        if chave in pergunta_normalizada:
+            resposta = respostas_fake[chave]
+            break
+
+    # Se não tiver resposta cadastrada
+    if not resposta:
+        resposta = "Desculpe, ainda não possuo uma resposta cadastrada para essa pergunta."
+
+    st.session_state.messages.append({"role": "assistant", "content": resposta})
+    st.rerun()
 
 # Fecha conexão
 conn.close()
-
